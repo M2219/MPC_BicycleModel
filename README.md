@@ -13,7 +13,7 @@ This repository contains cpp model predictive controller (MPC) for controling a 
 - [osqp-eigen](https://github.com/robotology/osqp-eigen)
 - [Eigen3](http://eigen.tuxfamily.org/index.php?title=Main_Page)
 - [cmake v3.0+](https://cmake.org/)
-- [matplotlibcpp](git clone https://github.com/lava/matplotlib-cpp.git).
+- [matplotlibcpp](https://github.com/lava/matplotlib-cpp.git).
 
 
 ## Building
