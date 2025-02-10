@@ -27,10 +27,10 @@ int main() {
     //getStraightCourse(dl, cx, cy, cyaw, ck);
     //getStraightCourse2(dl, cx, cy, cyaw, ck);
     //getStraightCourse3(dl, cx, cy, cyaw, ck);
-    getForwardCourse(dl, cx, cy, cyaw, ck);
+    //getForwardCourse(dl, cx, cy, cyaw, ck);
 
-    //getSwitchBackCourse(dl, cx, cy, cyaw, ck);
-    //x0 << 2, 0, 0, 0; // start and start is the same
+    getSwitchBackCourse(dl, cx, cy, cyaw, ck);
+    x0 << 2, 0, 0, 0; // start and start is the same
 
     std::vector<double> sp = calcSpeedProfile(cx, cy, cyaw, TARGET_SPEED);
     // set the preview window
@@ -121,6 +121,8 @@ int main() {
 
     std::vector<double> x_data, y_data, delta_data; // Store trajectory data
 
+    double total_time = 0.0;
+    double avg_frequency = 0.0;
     for (int i = 0; i < numberOfSteps; i++)
     {
         auto loop_start = high_resolution_clock::now();
@@ -180,8 +182,9 @@ int main() {
 
         auto loop_end = high_resolution_clock::now();
         duration<double> loop_duration = loop_end - loop_start;
-        double loop_freq = 1.0 / loop_duration.count();
-        std::cout << "Loop Frequency: " << loop_freq << " Hz" << std::endl;
+        total_time += loop_duration.count();
+        avg_frequency = (i + 1) / total_time;
+        std::cout << "Iteration: " << i << " | Avg Frequency: " << avg_frequency << " Hz" << std::endl;
 
     }
     plt::figure();
@@ -209,6 +212,5 @@ int main() {
     // Show all subplots
     plt::show();
     return 0;
-
 
 }
