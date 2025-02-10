@@ -194,7 +194,6 @@ int main() {
     // Labels and formatting
     plt::xlabel("X Position");
     plt::ylabel("Y Position");
-    plt::title("MPC Trajectory vs. Reference");
     plt::legend();
     plt::grid(true);
 
@@ -205,7 +204,6 @@ int main() {
     // Labels and formatting
     plt::xlabel("Time Steps");
     plt::ylabel("Steering Angle (delta) [rad]");
-    plt::title("Steering Control Over Time");
     plt::grid(true);
 
     // Show all subplots
