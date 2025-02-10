@@ -50,7 +50,6 @@ Choose the target course in the main.cpp and adjust the parameters in mpc_contro
 ### 
 ![SwitchBackCourse](./imgs/switchback.png)
 
-
 ## ROS
 
 The ROS node will be provided in the following page
