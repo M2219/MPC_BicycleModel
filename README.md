@@ -1,6 +1,11 @@
-# MPC_BicycleModel
+## MPC_BicycleModel
 This repository contains cpp model predictive controller (MPC) for controling a vehicle based on bicycle model
 
+# Notes
+- The repository uses a cubic planner to produce path based on waypoints.
+- Use direct linearized dynamic model to get faster performance.
+- Use RK4 model to get more accurate result.
+- Change the smoothYaw mechanism to get smoother yaw for sharp edges.
 
 ## Dependencies
 - [boost v1.58](https://www.boost.org/users/history/version_1_58_0.html)
