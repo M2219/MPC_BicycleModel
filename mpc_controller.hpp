@@ -10,7 +10,7 @@ static constexpr int NX = 4; // states
 static constexpr int NU = 2; // input
 
 static constexpr int N_IND_SEARCH = 10;
-static constexpr double DT = 0.05; // s
+static constexpr double DT = 0.02; // s
 static constexpr double  WB = 0.650; // m
 static constexpr double  MAX_STEER = 0.41; // max delta rad
 static constexpr double  MAX_DSTEER = 0.52; // max ddelta rad/s -  30 deg / s

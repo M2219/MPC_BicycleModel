@@ -26,11 +26,11 @@ int main() {
 
     //getStraightCourse(dl, cx, cy, cyaw, ck);
     //getStraightCourse2(dl, cx, cy, cyaw, ck);
-    //getStraightCourse3(dl, cx, cy, cyaw, ck);
+    getStraightCourse3(dl, cx, cy, cyaw, ck);
     //getForwardCourse(dl, cx, cy, cyaw, ck);
 
-    getSwitchBackCourse(dl, cx, cy, cyaw, ck);
-    x0 << 2, 0, 0, 0; // start and start is the same
+    //getSwitchBackCourse(dl, cx, cy, cyaw, ck);
+    //x0 << 2, 0, 0, 0; // start and start is the same
 
     std::vector<double> sp = calcSpeedProfile(cx, cy, cyaw, TARGET_SPEED);
     // set the preview window
