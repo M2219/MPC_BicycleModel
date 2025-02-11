@@ -7,7 +7,7 @@ This repository contains cpp model predictive controller (MPC) for controling a 
 -    Use a directly linearized dynamic model for improved computational efficiency.
 -    Apply the RK4 model to achieve more accurate results.
 -    Modify the smoothYaw mechanism to ensure a smoother yaw transition, especially for sharp edges.
--    Available smooth mechanism are: smoothYaw, smoothYawMovingAverage, smoothYawKalman(cyaw), smoothYawSavitzkyGolay
+-    Available smooth mechanisms are: smoothYaw, smoothYawMovingAverage, smoothYawKalman(cyaw), smoothYawSavitzkyGolay
 
 ## Dependencies
 - [boost v1.58](https://www.boost.org/users/history/version_1_58_0.html)
