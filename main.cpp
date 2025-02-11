@@ -21,7 +21,7 @@ int main() {
     x0 << 0, 0, 0, 0;
     ctr << 0, 0;
 
-    double dl = 0.1;  // Course tick
+    double dl = 0.01;  // Course tick
     std::vector<double> cx, cy, cyaw, ck;
 
     //getStraightCourse(dl, cx, cy, cyaw, ck);
