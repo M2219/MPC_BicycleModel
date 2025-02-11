@@ -58,22 +58,112 @@ std::vector<double> calcSpeedProfile(const std::vector<double>& cx, const std::v
     speed_profile.back() = 0.0; // Stop at the final point
     return speed_profile;
 }
-
+/*
 // Smooth yaw values to avoid discontinuities
 void smoothYaw(std::vector<double>& yaw) {
     for (size_t i = 0; i < yaw.size() - 1; ++i) {
         double dyaw = yaw[i + 1] - yaw[i];
 
-        while (dyaw >= M_PI / 2.0) {
+        while (dyaw >= M_PI) {
             yaw[i + 1] -= 2.0 * M_PI;
             dyaw = yaw[i + 1] - yaw[i];
         }
 
-        while (dyaw <= -M_PI / 2.0) {
+        while (dyaw <= -M_PI) {
             yaw[i + 1] += 2.0 * M_PI;
             dyaw = yaw[i + 1] - yaw[i];
         }
     }
+}
+*/
+void smoothYaw(std::vector<double>& yaw) {
+    if (yaw.empty()) return;
+
+    double prev_yaw = yaw[0];
+    for (size_t i = 1; i < yaw.size(); ++i) {
+        double delta_yaw = yaw[i] - prev_yaw;
+
+        while (delta_yaw > M_PI) {
+            yaw[i] -= 2.0 * M_PI;
+            delta_yaw = yaw[i] - prev_yaw;
+        }
+        while (delta_yaw < -M_PI) {
+            yaw[i] += 2.0 * M_PI;
+            delta_yaw = yaw[i] - prev_yaw;
+        }
+
+        prev_yaw = yaw[i];
+    }
+}
+
+void smoothYawMovingAverage(std::vector<double>& yaw, int window_size) {
+    if (yaw.size() < window_size) return;
+
+    std::vector<double> smoothed_yaw(yaw.size());
+
+    for (size_t i = 0; i < yaw.size(); ++i) {
+        double sum = 0.0;
+        int count = 0;
+
+        for (int j = -window_size / 2; j <= window_size / 2; ++j) {
+            int idx = i + j;
+            if (idx >= 0 && idx < yaw.size()) {
+                sum += yaw[idx];
+                count++;
+            }
+        }
+        smoothed_yaw[i] = sum / count;
+    }
+
+    yaw = smoothed_yaw;  // Apply smoothed values back to original vector
+}
+
+void smoothYawKalman(std::vector<double>& yaw, double process_noise, double measurement_noise) {
+    if (yaw.empty()) return;
+
+    double estimated_yaw = yaw[0];
+    double error_cov = 1.0; // Initial estimate error covariance
+
+    for (size_t i = 1; i < yaw.size(); ++i) {
+        // Prediction step
+        estimated_yaw = estimated_yaw;  // Assume no external control input
+        error_cov += process_noise;
+
+        // Correction step
+        double kalman_gain = error_cov / (error_cov + measurement_noise);
+        estimated_yaw += kalman_gain * (yaw[i] - estimated_yaw);
+        error_cov *= (1 - kalman_gain);
+
+        yaw[i] = estimated_yaw;  // Update the yaw value
+    }
+}
+
+void smoothYawSavitzkyGolay(std::vector<double>& yaw, int window_size, int poly_order) {
+    if (yaw.size() < window_size || poly_order >= window_size) return;
+
+    std::vector<double> smoothed_yaw(yaw.size());
+    Eigen::VectorXd coeffs = Eigen::VectorXd::Zero(poly_order + 1);
+
+    for (size_t i = 0; i < yaw.size(); ++i) {
+        int half_window = window_size / 2;
+        int start = std::max(0, static_cast<int>(i) - half_window);
+        int end = std::min(static_cast<int>(yaw.size()) - 1, static_cast<int>(i) + half_window);
+
+        Eigen::MatrixXd A(end - start + 1, poly_order + 1);
+        Eigen::VectorXd Y(end - start + 1);
+
+        for (int j = start; j <= end; ++j) {
+            for (int p = 0; p <= poly_order; ++p) {
+                A(j - start, p) = std::pow(j - i, p);
+            }
+            Y(j - start) = yaw[j];
+        }
+
+        Eigen::VectorXd X = (A.transpose() * A).ldlt().solve(A.transpose() * Y);
+        smoothed_yaw[i] = X(0);
+    }
+
+    yaw = smoothed_yaw;  // Apply smoothed values back
 }
 // Generate a simple straight-line course
 void getStraightCourse(double dl, std::vector<double>& cx, std::vector<double>& cy,

@@ -71,7 +71,9 @@ int main() {
     double goal_x = cx.back(), goal_y = cy.back();
 
     smoothYaw(cyaw);
-
+    //smoothYawMovingAverage(cyaw);
+    //smoothYawKalman(cyaw);
+    //smoothYawSavitzkyGolay(cyaw);
     Eigen::MatrixXd xRef(4, mpcWindow + 1);
     for (int t = 0; t <= mpcWindow; t++) {
         xRef(0, t) = cx[t];

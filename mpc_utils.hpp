@@ -17,7 +17,9 @@ std::vector<double> calcSpeedProfile(const std::vector<double>& cx, const std::v
 
 // Yaw smoothing
 void smoothYaw(std::vector<double>& yaw);
-
+void smoothYawMovingAverage(std::vector<double>& yaw, int window_size = 5);
+void smoothYawKalman(std::vector<double>& yaw, double process_noise = 0.1, double measurement_noise = 0.1);
+void smoothYawSavitzkyGolay(std::vector<double>& yaw, int window_size = 5, int poly_order = 2);
 // Course generation functions
 void getStraightCourse(double dl, std::vector<double>& cx, std::vector<double>& cy,
                        std::vector<double>& cyaw, std::vector<double>& ck);
