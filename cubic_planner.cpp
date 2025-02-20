@@ -1,4 +1,3 @@
-#include "cubic_planner.hpp"
 #include <iostream>
 #include <vector>
 #include <cmath>

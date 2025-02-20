@@ -119,7 +119,7 @@ int main() {
     Eigen::VectorXd QPSolution;
 
     // number of iteration steps
-    int numberOfSteps = 20000;
+    int numberOfSteps = 4000;
 
     std::vector<double> x_data, y_data, delta_data; // Store trajectory data
 

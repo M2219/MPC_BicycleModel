@@ -10,16 +10,16 @@ static constexpr int NX = 4; // states
 static constexpr int NU = 2; // input
 
 static constexpr int N_IND_SEARCH = 10;
-static constexpr double DT = 0.02; // s
+static constexpr double DT = 0.05; // s
 static constexpr double  WB = 0.650; // m
 static constexpr double  MAX_STEER = 0.41; // max delta rad
 static constexpr double  MAX_DSTEER = 0.52; // max ddelta rad/s -  30 deg / s
 static constexpr double  MAX_SPEED = 1.5; // m/s max speed
 static constexpr double  MIN_SPEED = -1.5; // m/s min speed
-static constexpr double  MAX_ACCEL = 1.0; // m/ss max accelration
+static constexpr double  MAX_ACCEL = 0.5; // m/ss max accelration
 static constexpr double GOAL_DIS = 1.5;  // goal distance m
 static constexpr double STOP_SPEED = 0.125; // stop speed m/s
-static constexpr double TARGET_SPEED = 1.0; // m/s
+static constexpr double TARGET_SPEED = 0.2; // m/s
 
 // Function Declarations
 
