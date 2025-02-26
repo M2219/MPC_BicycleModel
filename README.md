@@ -37,10 +37,10 @@ git clone https://github.com/robotology/osqp-eigen.git
 cd osqp-eigen
 mkdir build
 cd build
-cmake -DCMAKE_INSTALL_PREFIX:PATH=/user/local/osqp-eigen ../
+cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr/local/osqp-eigen ../
 make
 make install
-echo 'export OsqpEigen_DIR=/user/local/osqp-eigen' >> ~/.bashrc
+echo 'export OsqpEigen_DIR=/usr/local/osqp-eigen' >> ~/.bashrc
 source ~/.bashrc
 
 mpc:
