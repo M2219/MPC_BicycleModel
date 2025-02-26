@@ -28,7 +28,7 @@ git checkout 0dd00a5
 git submodule update --init --recursive
 mkdir build
 cd build
-cmake -G "Unix Makefiles" ..
+cmake -G "Unix Makefiles" .. -DCMAKE_INSTALL_PREFIX:PATH=/usr/local/osqp ../
 cmake --build .
 cmake --build . --target install
 
