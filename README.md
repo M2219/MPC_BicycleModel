@@ -21,6 +21,18 @@ This repository contains cpp model predictive controller (MPC) for controling a 
 ## Building
 ### Linux
 ```sh
+osqp:
+git clone https://github.com/osqp/osqp
+cd osqp
+git checkout 0dd00a5
+git submodule update --init --recursive
+mkdir build
+cd build
+cmake -G "Unix Makefiles" ..
+cmake --build .
+cmake --build . --target install
+
+osqp-eigen:
 git clone https://github.com/robotology/osqp-eigen.git
 cd osqp-eigen
 mkdir build
@@ -31,6 +43,7 @@ make install
 echo 'export OsqpEigen_DIR=/user/local/osqp-eigen' >> ~/.bashrc
 source ~/.bashrc
 
+mpc:
 git clone https://github.com/M2219/MPC_BicycleModel
 cd MPC_BicycleModel 
 mkdir build && cd build
